@@ -63,7 +63,132 @@
             echo $regionName . ': ' . implode(', ', $arrTowns) . '<br>';
         }
 
+        echo '<h3>задания № 4, 5, 9 три в одном</h3>';
+        /*
+        4. Объявить массив, индексами которого являются буквы русского языка, а значениями – соответствующие латинские буквосочетания (‘а’=> ’a’, ‘б’ => ‘b’, ‘в’ => ‘v’, ‘г’ => ‘g’, …, ‘э’ => ‘e’, ‘ю’ => ‘yu’, ‘я’ => ‘ya’).
+        Написать функцию транслитерации строк.
+        */
 
+
+        function translitRuToEn($string){
+        $alfabet = [
+            'а' => 'a',
+            'б' => 'b',
+            'в' => 'v',
+            'г' => 'g',
+            'д' => 'd',
+            'е' => 'ye',
+            'ё' => 'yo',
+            'ж' => 'zh',
+            'з' => 'z',
+            'и' => 'i',
+            'й' => 'j',
+            'к' => 'k',
+            'л' => 'l',
+            'м' => 'm',
+            'н' => 'n',
+            'о' => 'o',
+            'п' => 'p',
+            'р' => 'r',
+            'с' => 's',
+            'т' => 't',
+            'у' => 'u',
+            'ф' => 'f',
+            'х' => 'h',
+            'ц' => 'c',
+            'ч' => 'ch',
+            'ш' => 'sh',
+            'щ' => 'shch',
+            'ъ' => '"',
+            'ы' => 'y',
+            'ь' => '\'',
+            'э' => 'e',
+            'ю' => 'yu',
+            'я' => 'ya',
+        ];
+        $string = mb_strtolower($string);
+        // функция mb_strtolower() не сработала на мобильном сервере
+        $newStr = '';
+            for ($i = 0; $i <= iconv_strlen($string) - 1; $i++){
+                if (iconv_substr($string,$i, 1) == ' '){
+                    $newStr = $newStr . '_';
+                } elseif (array_key_exists(iconv_substr($string, $i, 1), $alfabet)) {
+                    $newStr = $newStr . $alfabet[iconv_substr($string, $i, 1)];
+                }
+                else {
+                    $newStr = $newStr . iconv_substr($string, $i, 1);
+                }
+            }
+            Echo $newStr;
+        }
+        translitRuToEn('А роза упала на лапу Азога');
+
+        echo '<h3>задания № 6</h3>';
+
+        $menu4 = [
+        	[
+        		'title' => 'Главная',
+        		'link' => '/'
+        	],
+        	[
+        		'title' => 'Контакты',
+        		'link' => '/contancts'
+        	],
+        	[
+        		'title' => 'Статьи',
+        		'link' => '/articles',
+        		'children' => [
+        			[
+        				'title' => 'Котики',
+        				'link' => '/articles/cats'
+        			],
+        			[
+        				'title' => 'Собачки',
+        				'link' => '/articles/dogs',
+        				'children' => [
+        					[
+        						'title' => 'Доберманы',
+        						'link' => '/articles/dogs/dobermani'
+        					],
+        					[
+        						'title' => 'Корги',
+        						'link' => '/articles/dogs/corgi',
+        						'children' => [/* */]
+        					]
+        				]
+        			]
+        		]
+        	]
+        ];
+
+        function getMenu($menu, $strMenu='') {
+            $strMenu = '<ul>';
+            foreach ($menu as $key => $value) {
+                $strMenu = $strMenu . '<li><a href="'. $value['link'] . '">' . $value['title'] . '</a></li>';
+                if (array_key_exists('children', $value)) {
+                    $strMenu = $strMenu . getMenu($value['children'], $strMenu);
+                }
+            }
+            $strMenu = $strMenu . '</ul>';
+            return $strMenu;
+        }
+
+        echo getMenu($menu4);
+
+        echo '<h3>задания № 7</h3>';
+        $str='';
+        For($i=0; $i<=9; $str=$str . ' ' . $i++){}
+        echo $str; //не нашёл способа поместить команду в условия цикла
          ?>
+
+         <ul>
+             <li>1</li>
+             <li>2</li>
+             <li>3
+                 <ul>
+                     <li><a href="#">3.1</a></li>
+                 </ul>
+             </li>
+         </ul>
     </body>
 </html>
