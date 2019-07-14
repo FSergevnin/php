@@ -1,0 +1,8 @@
+
+.text a:hover {
+    text-decoration: underline;
+}
+
+img:hover {
+    transform: rotate(360deg) scale(2);
+}
