@@ -1,0 +1,11 @@
+
+.text a:hover {
+    text-decoration: underline;
+}
+
+img {
+    margin: 1px;
+}
+img:hover {
+    transform: scale(1.1);
+}
