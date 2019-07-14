@@ -3,6 +3,9 @@
     text-decoration: underline;
 }
 
+img {
+    margin: 1px;
+}
 img:hover {
-    transform: rotate(360deg) scale(2);
+    transform: scale(1.1);
 }
