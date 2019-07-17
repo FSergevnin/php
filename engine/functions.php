@@ -29,17 +29,19 @@ function render($file, $variables = [])
 }
 
 
-function createGallery($imgDir) {
+function createGallery($sql) {
 	$result = '';
 
-	$images = scandir(WWW_DIR . $imgDir);
+	$assocResult = getAssocResult($sql);
 
-	foreach ($images as $image) {
-		if(is_file(WWW_DIR . $imgDir . $image)) {
-			$result .= render(TEMPLATES_DIR . 'galleryItem.tpl', [
-				'src' => $imgDir . $image
-			]);
-		}
+	foreach ($assocResult as $row) {
+		$result .= render(TEMPLATES_DIR . 'galleryItem.tpl', [
+			'views' => $row[views],
+			'src' => $row[url],
+			'alt' => $row[title]
+
+		]);
 	}
+
 	return $result;
 }
