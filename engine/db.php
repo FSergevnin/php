@@ -24,6 +24,7 @@ function getAssocResult($sql)
 	$result = mysqli_query($db, $sql);
 
 	$array_result = [];
+	
 	while ($row = mysqli_fetch_assoc($result)) {
 		$array_result[] = $row;
 	}
@@ -40,4 +41,3 @@ function show($sql)
 	}
 	return $result[0];
 }
-
