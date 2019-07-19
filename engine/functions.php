@@ -36,6 +36,7 @@ function createGallery($sql) {
 
 	foreach ($assocResult as $row) {
 		$result .= render(TEMPLATES_DIR . 'galleryItem.tpl', [
+			'id' => $row[id],
 			'views' => $row[views],
 			'src' => $row[url],
 			'alt' => $row[title]
