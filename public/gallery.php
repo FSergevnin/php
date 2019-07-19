@@ -11,3 +11,5 @@ echo render(TEMPLATES_DIR . 'index.tpl', [
 	'h1' => 'Лучшие картиночки',
 	'content' => $gallery
 ]);
+
+?>
