@@ -1,14 +1,14 @@
 
 
 <form method="post">
-    <input type="number" name="fistNumber" value="">
+    <input type="number" name="fistNumber" value="" placeholder="первое число">
     <select class="" name="action">
         <option>+</option>
         <option>-</option>
         <option>*</option>
         <option>/</option>
     </select>
-    <input type="number" name="secondNumber" value="">
+    <input type="number" name="secondNumber" value="" placeholder="второе число">
     <input type="submit" name="" value="расчет">
 </form>
 
@@ -38,3 +38,12 @@ $result = "$_POST[fistNumber] $_POST[action] $_POST[secondNumber] = ";
             break;
         }
 ?>
+
+<form method="post">
+    <input type="number" name="fistNumber" value="" placeholder="первое число">
+    <input type="number" name="secondNumber" value="" placeholder="второе число">
+    <input type="submit" name="plus" value="+">
+    <input type="submit" name="minus" value="-">
+    <input type="submit" name="multiplication" value="*">
+    <input type="submit" name="division" value="/">
+</form>
