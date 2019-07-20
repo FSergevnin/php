@@ -3,19 +3,11 @@
 require_once __DIR__ . '/../config/config.php';
 
 
-var_dump(scandir(IMG_DIR));
-die;
 
+$news = getNews();
 
-
-// $variables = [
-// 	'title' => 'Главная страница',
-// 	'h1' => 'Добро пожаловать',
-// 	'content' => '<div class="privet"><img src="/img/1.jpg"></div>'
-// ];
-// $templateName = TEMPLATES_DIR . 'index.tpl';
-
-
-// echo render($templateName, $variables);
-
-
+echo render(TEMPLATES_DIR . 'index.tpl', [
+	'title' => 'Главная',
+	'h1' => 'Горячие новости',
+	'content' => renderNews($news)
+]);
