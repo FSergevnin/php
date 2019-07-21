@@ -17,9 +17,6 @@ if (!$review) {
 	exit();
 }
 
-echo "<pre>";
-var_dump($_POST);
-echo "</pre><hr>";
 
 $author = $_POST['author'] ?? $review['author'];
 $text = $_POST['text'] ?? $review['text'];
@@ -28,7 +25,7 @@ $messages = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	if ($author && $text) {
-		if (updateReview($id, $author, $text)) { 
+		if (updateReview($id, $author, $text)) {
 			$messages .= "Комментарий изменен";
 		} else {
 			$messages .= "Что-то пошло не так";
@@ -40,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		if (!$text) {
 			$messages .= "Добавьте Комментарий<br>";
 		}
-	}	
+	}
 }
 
 ?>
