@@ -1,7 +1,9 @@
-<a href="./productView.php?id={{ID}}" >
-    <div class = "catalogItem">
+<div class = "catalogItem">
+    <a href="./productView.php?id={{ID}}" >
         <img src="{{SRC}}" alt="{{ALT}}" style="max-width: 150px; max-height: 150px"/>
         <p>{{NAME}}</p>
         <p>Цена &#8381;{{PRICE}}</p>
-    </div>
-</a>
+    </a>
+    <a href="editProduct.php?id={{ID}}">Изменить</a><br>
+    <a href="deleteProduct.php?id={{ID}}">Удалить</a><br>
+</div>
