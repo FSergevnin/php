@@ -2,9 +2,7 @@
 
 require_once __DIR__ . '/../config/config.php';
 
-echo "<pre>";
-var_dump($_POST);
-echo "</pre><hr>";
+
 
 $author = $_POST['author'] ?? '';
 $text = $_POST['text'] ?? '';
