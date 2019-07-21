@@ -10,9 +10,24 @@
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $result = "$_POST[fistNumber] $_POST[action] $_POST[secondNumber] = ";
+
+    if (isset($_POST[plus])) {
+        $action = '+';
+    }
+    if (isset($_POST[minus])) {
+        $action = '-';
+    }
+    if (isset($_POST[multiplication])) {
+        $action = '*';
+    }
+    if (isset($_POST[division])) {
+        $action = '/';
+    }
+
+    $result = "$_POST[fistNumber] $action $_POST[secondNumber] = ";
+
     if (is_numeric($_POST[fistNumber]) && is_numeric($_POST[secondNumber])){
-        switch ($_POST[action]) {
+        switch ($action) {
             case '+':
                 echo $result . ($_POST[fistNumber] + $_POST[secondNumber]);
                 break;
@@ -33,8 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             default:
                 echo 'что-то пошло не так';
                 break;
-            }
         }
+    }
 }
 
 ?>
