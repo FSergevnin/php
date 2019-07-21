@@ -20,6 +20,7 @@ echo render(TEMPLATES_DIR . 'productView.tpl', [
     'url' => $product[image],
     'alt' => $product[name],
     'description' => $product[description],
-    'price' => $product[price]
+    'price' => $product[price],
+    'id' => $product[id],
 ]);
 ?>
