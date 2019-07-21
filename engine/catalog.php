@@ -80,11 +80,11 @@ function createCatalog() {
 // 	return $result;
 // }
 //
-// function deleteReview($id)
-// {
-// 	$id = (int)$id;
-//
-// 	$sql = "DELETE FROM `reviews` WHERE `id` = $id";
-//
-// 	return execQuery($sql);
-// }
+function deleteProduct($id)
+{
+	$id = (int)$id;
+
+	$sql = "DELETE FROM `products` WHERE `id` = $id";
+
+	return execQuery($sql);
+}
