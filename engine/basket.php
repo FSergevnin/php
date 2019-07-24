@@ -39,4 +39,11 @@ function createBasket() {
     $result = "<h3>В корзине $cntProducts товар(а) на сумму $fullPrice руб.</h3> $result";
 	return $result;
 }
+
+function deletefromBasket($id){
+
+    setcookie("basket[$id]", 0);
+
+}
+
  ?>
