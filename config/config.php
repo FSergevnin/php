@@ -21,3 +21,4 @@ require_once ENGINE_DIR . 'db.php';
 require_once ENGINE_DIR . 'news.php';
 require_once ENGINE_DIR . 'reviews.php';
 require_once ENGINE_DIR . 'catalog.php';
+require_once ENGINE_DIR . 'basket.php';
