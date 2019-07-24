@@ -10,4 +10,6 @@ echo render(TEMPLATES_DIR . 'catalog.tpl', [
 	'content' => $catalog
 ]);
 
+
+
 ?>
