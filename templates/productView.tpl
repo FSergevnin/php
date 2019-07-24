@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>{{TITLE}}</title>
-
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 
 </head>
 <body>
@@ -18,7 +18,9 @@
 	<img src="{{URL}}" alt="{{ALT}}" style="max-width: 500px; max-height: 500px">
     <h3>{{H3}}</h3>
     <p>Цена &#8381;{{PRICE}}</p>
-    <p>Описание: {{DESCRIPTION}}</p>
+	<a href="basket.php?id={{ID}}">Добавить в корзину</a><br>
+	<p>Описание: {{DESCRIPTION}}</p>
+
     <a href="editProduct.php?id={{ID}}">Изменить</a><br>
     <a href="deleteProduct.php?id={{ID}}">Удалить</a><br>
 	<a href="./catalog.php">назад</a>
