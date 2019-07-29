@@ -12,7 +12,4 @@ if (!$id) {
 deleteFromBasket($id);
 
 
-
-header("Location: /basket.php");
-
- ?>
+?>

@@ -2,6 +2,9 @@
 
 function createBasket() {
 
+	if (is_null($_COOKIE['basket'])){return "в вашей корзине пусто";}
+
+
 	$basket = $_COOKIE['basket'];
 
     $strId = '';
@@ -41,9 +44,15 @@ function createBasket() {
 }
 
 function deletefromBasket($id){
+	$basket = $_COOKIE['basket'];
 
-    setcookie("basket[$id]", 0);
 
+	unset($basket[$id]);
+
+	setcookie("basket[$id]", false);
+
+	
+	header("Location: /basket.php");
 }
 
  ?>
