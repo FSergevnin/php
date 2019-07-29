@@ -1,7 +1,17 @@
 
 a {
     text-decoration: none;
+    color: black;
 }
+
+a:visited {
+    color: black;
+}
+
+a:hover {
+    color: red;
+}
+
 header ul {
     list-style-type: none;
     padding-inline-start: 0px;
@@ -15,8 +25,12 @@ header ul li {
     border-color: white;
     border-radius: 3px;
 }
-.text a:hover {
-    text-decoration: underline;
+header ul li:hover {
+    background-color: darkgrey;
+}
+
+header a:hover {
+    color: white;
 }
 
 img {
@@ -29,6 +43,6 @@ img {
     margin: 3px;
     box-shadow: 0 0 2px rgba(0,0,0,0.5)
 }
-/* img:hover {
-    transform: scale(1.1);
-} */
+.galleryItem:hover {
+    transform: scale(1.05);
+}
