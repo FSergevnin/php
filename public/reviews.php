@@ -27,12 +27,13 @@ if ($author && $text) {
 
 
 
-echo renderReviews();
-
+echo render(TEMPLATES_DIR . 'index.tpl', [
+	'title' => 'Отзывы',
+	'h1' => 'О нас пишут',
+	'content' => renderReviews()
+]);
 ?>
 
-<br>
-<br>
 <br>
 <div class="messages">
 	<?= $messages ?>

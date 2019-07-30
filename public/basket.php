@@ -14,7 +14,7 @@ if (isset($_GET[id])) {
 }
 $basket = createBasket();
 
-echo render(TEMPLATES_DIR . 'catalog.tpl', [
+echo render(TEMPLATES_DIR . 'index.tpl', [
 	'title' => 'Корзина',
 	'h1' => 'Товары готовые к покупке',
 	'content' => $basket
