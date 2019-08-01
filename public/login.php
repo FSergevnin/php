@@ -19,13 +19,11 @@ if ($login && $password) {
 	if($user) {
 		$_SESSION['login'] = $user;
 
-        $message = 'Привет ' . $_SESSION['login']['login'];
+        header("Location: /basket.php"); // TODO: после успешной авторизации должен выкидывать туда откуда пришёл, а пока в корзину
 	} else {
 		$message = 'Неверная пара логин-пароль';
 	}
 }
-
-
 
  ?>
 
