@@ -20,4 +20,7 @@ echo render(TEMPLATES_DIR . 'index.tpl', [
 	'content' => $basket
 ]);
 
+echo empty($_SESSION['login'])
+    ? '<br><a href="/login.php" class="btn">Войти</a>'
+    : '<br><a href="/createOrder.php" class="btn">Оформить заказ</a>';
  ?>
