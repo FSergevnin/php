@@ -24,7 +24,7 @@ function getAssocResult($sql)
 	$result = mysqli_query($db, $sql);
 
 	$array_result = [];
-	
+
 	while ($row = mysqli_fetch_assoc($result)) {
 		$array_result[] = $row;
 	}
@@ -40,4 +40,22 @@ function show($sql)
 		return null;
 	}
 	return $result[0];
+}
+/**
+ * Вставляет строку и возвращается вставленный id
+ * @param string $sql
+ * @return int
+ */
+function insert($sql)
+{
+	//создаем соединение с БД
+	$db = createConnection();
+
+	//выполняем запрос
+	mysqli_query($db, $sql);
+	$id = mysqli_insert_id($db);
+
+	//закрываем соединение
+	mysqli_close($db);
+	return $id;
 }
