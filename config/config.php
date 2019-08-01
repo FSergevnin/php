@@ -1,4 +1,6 @@
 <?php
+//Стартуем сессию
+session_start();
 
 define('SITE_DIR', __DIR__ . '/../');
 define('CONFIG_DIR', SITE_DIR . 'config/');
