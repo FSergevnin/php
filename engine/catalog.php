@@ -57,3 +57,9 @@ function deleteProduct($id)
 
 	return execQuery($sql);
 }
+
+function getProductsByIds($ids)
+{
+	$sql = "SELECT * FROM `products` WHERE `id` IN (" . implode(', ', $ids) . ")";
+	return getAssocResult($sql);
+}
