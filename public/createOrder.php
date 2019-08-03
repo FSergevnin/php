@@ -34,7 +34,7 @@ if (isset($_POST['address'])) {
 	$sql .= implode(', ', $sqlParts);
 
 	if (execQuery($sql)) {
-		echo 'OK';
+		//echo 'OK';
 		foreach ($cart as $productId => $amount) {
 			setcookie("basket[$productId]", null, -1, '/');
 		}
