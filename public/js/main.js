@@ -50,11 +50,11 @@ function login() {
 	});
 }
 
-function addToCart(id) {
+function addToBasket(id) {
 	$.post({
 		url: '/api.php',
 		data: {
-			apiMethod: 'addToCart',
+			apiMethod: 'addToBasket',
 			postData: {
 				id: id
 			}
@@ -69,11 +69,11 @@ function addToCart(id) {
 	})
 }
 
-function removeFromCart(id) {
+function removeFromBasket(id) {
 	$.post({
 		url: '/api.php',
 		data: {
-			apiMethod: 'removeFromCart',
+			apiMethod: 'removeFromBasket',
 			postData: {
 				id: id
 			}
