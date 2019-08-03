@@ -47,9 +47,13 @@ img {
     transform: scale(1.05);
 }
 .btn {
-	background-color: #999;
+    display: block;
+    max-width: 150px;
+    text-align: center;
+    background-color: lightgrey;
 	border-radius: 5px;
-	padding: 5px;
+    margin: 3px;
+	padding: 4px;
 	cursor: pointer;
 }
 
@@ -59,8 +63,9 @@ img {
 
 table, th, td {
 	border: 1px solid #999999;
+    border-collapse: collapse;
 }
 
 td {
 	padding: 8px;
-} 
+}
