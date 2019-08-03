@@ -7,7 +7,16 @@ function showProduct($id)
 	return show($sql);
 }
 
+function getMaxDiscount() {
+	$sql = "SELECT `discount` FROM `discounts` WHERE dateStart < NOW() AND dateFinish > NOW() ORDER BY `discount` DESC LIMIT 1";
+	$assocResult = show($sql);
+	if (isset($assocResult)) {
+		return $assocResult[discount];
+	}
+}
+
 function createCatalog() {
+	$discount = getMaxDiscount();
 
 	$sql = "SELECT * FROM `products`";
 
@@ -16,12 +25,19 @@ function createCatalog() {
 	$assocResult = getAssocResult($sql);
 
 	foreach ($assocResult as $row) {
+		if (isset($discount)) {
+			$name = $row[name] . ' Cкидка ' . $discount . '%';
+			$price = $row[price] * $discount / 100;
+		}
+		else {
+			$name = $row[name];
+		}
 		$result .= render(TEMPLATES_DIR . 'catalogItem.tpl', [
 			'id' => $row[id],
 			'src' => $row[image],
 			'alt' => $row[name],
-			'name' => $row[name],
-			'price' => $row[price],
+			'name' => $name,
+			'price' => "$price"
 
 		]);
 	}
