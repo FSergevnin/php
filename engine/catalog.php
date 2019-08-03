@@ -63,3 +63,70 @@ function getProductsByIds($ids)
 	$sql = "SELECT * FROM `products` WHERE `id` IN (" . implode(', ', $ids) . ")";
 	return getAssocResult($sql);
 }
+/**
+ * Генерирует страницу моих заказов
+ * @return string
+ */
+function generateMyOrdersPage()
+{
+	//получаем id пользователя и и получаем все заказы пользователя
+	$userId = $_SESSION['login']['id'];
+	$orders = getAssocResult("SELECT * FROM `orders` WHERE `userId` = $userId ORDER BY `dateCreate` DESC");
+
+	$result = '';
+	foreach ($orders as $order) {
+		$orderId = $order['id'];
+
+		//получаем продукты, которые есть в заказе
+		//TODO вытащить из цикла
+		$products = getAssocResult("
+			SELECT *, `op`.`price` FROM `orderProducts` as op
+			JOIN `products` as p ON `p`.`id` = `op`.`productId`
+			WHERE `op`.`orderId` = $orderId
+		");
+
+		$content = '';
+		$orderSum = 0;
+		//генерируем элементы таблицы товаров в заказе
+		foreach ($products as $product) {
+			$count = $product['amount'];
+			$price = $product['price'];
+			$productSum = $count * $price;
+			$content .= render(TEMPLATES_DIR . 'orderTableRow.tpl', [
+				'name' => $product['name'],
+				'id' => $product['id'],
+				'count' => $count,
+				'price' => $price,
+				'sum' => "$productSum"
+			]);
+			$orderSum += $productSum;
+		}
+
+		$statuses = [
+			1 => 'Не обработан',
+			2 => 'Отменен',
+			3 => 'Оплачен',
+			4 => 'Доставлен',
+		];
+
+		$buttons = (int)$order['status'] === 1 ? "<a class='btn' onclick='changeOrderStatus($orderId, 2)'>Отменить</a>" : '';
+
+		//генерируем полную таблицу заказа
+		$result .= render(TEMPLATES_DIR . 'orderTable.tpl', [
+			'id' => $orderId,
+			'content' => $content,
+			'sum' => "$orderSum",
+			'status' => $statuses[$order['status']],
+			'buttons' => $buttons
+		]);
+	}
+	return $result;
+}
+
+function changeOrderStatus($orderId, $newStatus)
+{
+	$orderId = (int)$orderId;
+	$newStatus = (int)$newStatus;
+	$sql = "UPDATE `orders` SET `status`= $newStatus WHERE `id` = $orderId";
+	return execQuery($sql);
+}
