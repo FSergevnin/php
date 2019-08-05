@@ -10,9 +10,7 @@ if(!$id) {
 	exit();
 }
 
-$sql = "SELECT * FROM products WHERE id = $id";
-
-$product = show($sql);
+$product = showProduct($id);
 
 echo render(TEMPLATES_DIR . 'productView.tpl', [
     'title' => 'Карточка товара',
@@ -20,7 +18,7 @@ echo render(TEMPLATES_DIR . 'productView.tpl', [
     'url' => $product[image],
     'alt' => $product[name],
     'description' => $product[description],
-    'price' => $product[price],
+    'price' => "$product[price]",
     'id' => $product[id],
 ]);
 ?>
