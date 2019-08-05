@@ -53,9 +53,6 @@ function createCatalog() {
 	return $result;
 }
 
-
-
-
 function updateProduct($id, $name, $price, $description)
 {
 	$link = createConnection();
