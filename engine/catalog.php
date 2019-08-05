@@ -27,7 +27,7 @@ function createCatalog() {
 	foreach ($assocResult as $row) {
 		if (isset($discount)) {
 			$name = $row[name] . ' Cкидка ' . $discount . '%';
-			$price = $row[price] * $discount / 100;
+			$price = $row[price] * (100 - $discount) / 100;
 		}
 		else {
 			$name = $row[name];
