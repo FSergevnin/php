@@ -2,9 +2,17 @@
 
 function showProduct($id)
 {
+	$discount = getMaxDiscount();
 	$id = (int)$id;
 	$sql = "SELECT * FROM `products` WHERE id = $id";
-	return show($sql);
+	$product = show($sql);
+
+	if (isset($discount)) {
+		$product[name] .= ' Cкидка ' . $discount . '%';
+		$product[price] *= 1 - $discount / 100;
+	}
+
+	return $product;
 }
 
 function getMaxDiscount() {
@@ -27,7 +35,7 @@ function createCatalog() {
 	foreach ($assocResult as $row) {
 		if (isset($discount)) {
 			$name = $row[name] . ' Cкидка ' . $discount . '%';
-			$price = $row[price] * (100 - $discount) / 100;
+			$price = $row[price] * (1 - $discount / 100);
 		}
 		else {
 			$name = $row[name];
@@ -145,4 +153,62 @@ function changeOrderStatus($orderId, $newStatus)
 	$newStatus = (int)$newStatus;
 	$sql = "UPDATE `orders` SET `status`= $newStatus WHERE `id` = $orderId";
 	return execQuery($sql);
+}
+
+/**
+ * Генерирует страницу из 20 последних заказов
+ * @return string
+ */
+function generateAllOrdersPage()
+{
+	$orders = getAssocResult("SELECT * FROM `orders` ORDER BY `dateCreate` DESC LIMIT 20");
+
+	$result = '';
+	foreach ($orders as $order) {
+		$orderId = $order['id'];
+
+		//получаем продукты, которые есть в заказе
+		//TODO вытащить из цикла
+		$products = getAssocResult("
+			SELECT *, `op`.`price` FROM `orderProducts` as op
+			JOIN `products` as p ON `p`.`id` = `op`.`productId`
+			WHERE `op`.`orderId` = $orderId
+		");
+
+		$content = '';
+		$orderSum = 0;
+		//генерируем элементы таблицы товаров в заказе
+		foreach ($products as $product) {
+			$count = $product['amount'];
+			$price = $product['price'];
+			$productSum = $count * $price;
+			$content .= render(TEMPLATES_DIR . 'orderTableRow.tpl', [
+				'name' => $product['name'],
+				'id' => $product['id'],
+				'count' => $count,
+				'price' => $price,
+				'sum' => "$productSum"
+			]);
+			$orderSum += $productSum;
+		}
+
+		$statuses = [
+			1 => 'Не обработан',
+			2 => 'Отменен',
+			3 => 'Оплачен',
+			4 => 'Доставлен',
+		];
+
+		$buttons = (int)$order['status'] === 1 ? "<a class='btn' onclick='changeOrderStatus($orderId, 2)'>Отменить</a><a class='btn' onclick='changeOrderStatus($orderId, 3)'>Подтвердить оплату</a>" : '';
+		$buttons = (int)$order['status'] === 3 ? "<a class='btn' onclick='changeOrderStatus($orderId, 2)'>Отменить</a><a class='btn' onclick='changeOrderStatus($orderId, 4)'>Подтвердить доставку</a>" : '';
+		//генерируем полную таблицу заказа
+		$result .= render(TEMPLATES_DIR . 'orderTable.tpl', [
+			'id' => $orderId,
+			'content' => $content,
+			'sum' => "$orderSum",
+			'status' => $statuses[$order['status']],
+			'buttons' => $buttons
+		]);
+	}
+	return $result;
 }
