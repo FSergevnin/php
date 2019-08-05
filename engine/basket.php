@@ -51,7 +51,7 @@ function deletefromBasket($id){
 
 	setcookie("basket[$id]", false);
 
-	
+
 	header("Location: /basket.php");
 }
 
