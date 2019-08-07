@@ -1,0 +1,71 @@
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:visited {
+    color: black;
+}
+
+a:hover {
+    color: red;
+}
+
+header ul {
+    list-style-type: none;
+    padding-inline-start: 0px;
+    display: inline-flex;
+
+}
+header ul li {
+    margin: 1px;
+    padding: 5px;
+    background-color: lightgrey;
+    border-color: white;
+    border-radius: 3px;
+}
+header ul li:hover {
+    background-color: darkgrey;
+}
+
+header a:hover {
+    color: white;
+}
+
+img {
+    margin: 1px;
+}
+
+.basketItem, .catalogItem, .galleryItem {
+    display: inline-block;
+    padding: 2px;
+    margin: 3px;
+    box-shadow: 0 0 2px rgba(0,0,0,0.5)
+}
+.galleryItem:hover {
+    transform: scale(1.05);
+}
+.btn {
+    display: block;
+    max-width: 150px;
+    text-align: center;
+    background-color: lightgrey;
+    border-radius: 5px;
+    margin: 3px;
+	  padding: 4px;
+    cursor: grab;
+}
+
+.btn:hover {
+	background-color: #aaa;
+}
+
+table, th, td {
+	border: 1px solid #999999;
+    border-collapse: collapse;
+}
+
+td {
+	padding: 8px;
+}
